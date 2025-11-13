@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> a1(n), a2(m);
+    for (int i = 0; i < n; i++)
+        cin >> a1[i];
+    for (int i = 0; i < m; i++)
+        cin >> a2[i];
+
+    unordered_map<int, int> freq;
+    for (int x : a1)
+        freq[x]++;
+
+    bool isSubset = true;
+    for (int x : a2) {
+        if (freq.find(x) == freq.end() || freq[x] == 0) {
+            isSubset = false;
+            break;
+        }
+        freq[x]--;
+    }
+
+    if (isSubset)
+        cout << "Yes";
+    else
+        cout << "No";
+
+    return 0;
+}
