@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    unordered_set<int> s;
+    for (int x : arr)
+        s.insert(x);
+
+    int maxLen = 0;
+
+    for (int x : s) {
+        if (s.find(x - 1) == s.end()) {
+            int current = x;
+            int len = 1;
+
+            while (s.find(current + 1) != s.end()) {
+                current++;
+                len++;
+            }
+            maxLen = max(maxLen, len);
+        }
+    }
+
+    cout << maxLen;
+    return 0;
+}
